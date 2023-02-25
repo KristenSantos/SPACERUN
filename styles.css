@@ -11,7 +11,7 @@
     text-align: center;
 
     /* Stryling the text and giving it gradiant */
-    color:#ef02d3;
+    color:#FCA4D9;
     background: -webkit-linear-gradient(#eee, #333);
     -webkit-background-clip: text;
     /* -webkit-text-fill-color: transparent;  */
@@ -59,5 +59,29 @@
     background:transparent url(clouds.png) repeat top center;
     z-index:2;
     opacity: .4;
-    animation:move-clouds-back 200s linear infinite;
+   animation:move-clouds-back 200s linear infinite;
 }
+#buttons{
+display: grid;
+justify-content:space-evenly ;
+}
+#start{
+background-color:#FCA4D9;
+opacity: .5;
+width: 90px;
+height: 35px;
+text-align: center;
+border-radius: 25px;
+font-family: fantasy;
+color: #eee;
+}
+#restart{
+    background-color: #FCA4D9;
+    opacity: .5;
+    width: 90px;
+    height: 35px;
+    text-align: center;
+    border-radius: 25px;
+    font-family: fantasy;
+    color: #eee;
+    }
