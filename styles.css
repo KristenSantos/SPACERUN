@@ -3,24 +3,54 @@
     padding: 0;
 }
 .title, h1{
-    font-size: 36px;
-    font-family: 'Lato', sans-serif;
-    margin-top:1em;
+    font-size: 6em;
+    font-family: 'Lilita One';
+    margin-top: 0.5em;
     margin-left: auto;
     margin-right:auto;
     text-align: center;
+    letter-spacing: 8px;
 
     /* Stryling the text and giving it gradiant */
-    color:#FCA4D9;
+    color:#F77CCD;
     background: -webkit-linear-gradient(#eee, #333);
     -webkit-background-clip: text;
-    /* -webkit-text-fill-color: transparent;  */
-    /* /* //text-shadow: 6px 6px 0px rgba(0,0,0,0.2); */
+    animation: animate 10s ease-in infinite;
 
     /* Make sure text is infront of background images */
     display:block;
     position: relative;
     z-index: 3;
+}
+@keyframes animate {
+  from {
+    text-shadow: 0 0 20px #F155C1;
+  }
+  to {
+    text-shadow: 0 0 30px #F155C1, 
+                0 0 10px #F155C1 
+  }
+}
+
+h5 {
+  font-family: 'Itim';
+  color: white;
+  margin-left: auto;
+  margin-right:auto;
+  text-align: center;
+  display:block;
+  position: relative;
+  z-index: 3;
+}
+img {
+  height: 12em;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 1em;
+  transform: rotate(-33deg);
+  position: relative;
+  display: block;
+  z-index: 3;
 }
 
 @keyframes move-twink-back {
@@ -62,26 +92,36 @@
    animation:move-clouds-back 200s linear infinite;
 }
 #buttons{
-display: grid;
+
 justify-content:space-evenly ;
+position: relative;
+z-index: 3;
+display: grid;
+
+
 }
 #start{
-background-color:#FCA4D9;
-opacity: .5;
-width: 90px;
-height: 35px;
+background-color:#F155C1;
+/* opacity: .5; */
+cursor: grab;
+height: 4em;
+width: 10em;
+margin-bottom: 1em;
 text-align: center;
 border-radius: 25px;
-font-family: fantasy;
+font-family: 'Itim';
 color: #eee;
+animation: animate 10s ease-in infinite;
+
 }
 #restart{
-    background-color: #FCA4D9;
-    opacity: .5;
-    width: 90px;
-    height: 35px;
+    background-color: #F155C1;
+    /* opacity: .5; */
+    height: 4em;
+    width: 10em;
     text-align: center;
     border-radius: 25px;
-    font-family: fantasy;
+    font-family: 'Itim';
     color: #eee;
+    animation: animate 10s ease-in infinite;
     }
