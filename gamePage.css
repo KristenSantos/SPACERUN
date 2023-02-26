@@ -1,8 +1,8 @@
 #game-container {
 	width: 400px;
-	height: 300px;
 	position: relative;
 	margin: 0 auto;
+	z-index: 3; 
 }
 
 #ball {
@@ -12,10 +12,11 @@
 	background-color: red;
 	position: absolute;
 	top: 0;
-	left: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-#obstacle {
+.obstacle {
 	width: 100px;
 	height: 20px;
 	background-color: green;
@@ -23,6 +24,7 @@
 	top: 100px;
 	left: 0;
 }
+
 @keyframes animate {
   from {
     text-shadow: 0 0 20px #F155C1;
@@ -80,4 +82,8 @@ img {
   position: relative;
   display: block;
   z-index: 3;
+}
+
+#ball, .obstacle {
+  z-index: 4;
 }
