@@ -1,74 +1,137 @@
-var ball = document.getElementById("ball");
-var obstacle = document.getElementById("obstacle");
-var gameContainer = document.getElementById("game-container");
+const ball = document.getElementById("ball");
+const obstacles = document.querySelectorAll(".obstacle");
+const gameContainer = document.getElementById("game-container");
 
-var ballSpeedX = 5;
-var ballSpeedY = 5;
-var ballPosX = 0;
-var ballPosY = gameContainer.offsetHeight - ball.offsetHeight;
-var ballColor = "red";
+let ballSpeedX = 0;
+let ballSpeedY = 0;
+let ballPosX = gameContainer.offsetWidth / 2 - ball.offsetWidth / 2;
+let ballPosY = gameContainer.offsetHeight - ball.offsetHeight;
+let ballColor = "red";
 
-var obstacleSpeed = 5;
-var obstaclePosX = 0;
-var obstaclePosY = 0;
+let obstacleSpeed = 5;
+let obstaclePosX = 0;
+let obstacleSpacing = 100;
+let obstaclePosY = obstacleSpacing;
 
-var gameLoop;
+for (let i = 0; i < obstacles.length; i++) {
+  const obstacle = obstacles[i];
+  obstacle.style.top = `${obstaclePosY}px`;
+  obstaclePosY += obstacleSpacing;
+}
 
-document.addEventListener("keydown", function(event) {
-	if (event.code === "Space") {
-		ballSpeedY = -10;
-	}
+let gameLoop;
+let gameStarted = false;
+let spaceKeyDown = false;
+
+document.addEventListener("keydown", (event) => {
+  if (event.code === "Space" && !gameStarted) {
+    gameStarted = true;
+    ballSpeedY = -10;
+  } else if (event.code === "Space") {
+    spaceKeyDown = true;
+  }
+});
+
+document.addEventListener("keyup", (event) => {
+  if (event.code === "Space") {
+    spaceKeyDown = false;
+    ballSpeedY = 10;
+  }
 });
 
 function updateBall() {
-	ballPosX += ballSpeedX;
-    ballPosY += ballSpeedY;
+  if (!gameStarted) {
+    return;
+  }
+  ballPosX += ballSpeedX;
+  ballPosY += ballSpeedY;
 
-    if (ballPosY < obstacle.offsetHeight && ballPosX + ball.offsetWidth > obstaclePosX && ballPosX < obstaclePosX + obstacle.offsetWidth) {
-        ballPosY = obstacle.offsetHeight;
-        ballSpeedY = 0;
-        ballColor = getRandomColor();
-    } else if (ballPosY > gameContainer.offsetHeight - ball.offsetHeight) {
-        ballPosY = gameContainer.offsetHeight - ball.offsetHeight;
-        ballSpeedY = -ballSpeedY;
-        ballColor = getRandomColor();
+  if (spaceKeyDown) {
+    ballSpeedY = -10;
+  } else {
+    ballSpeedY = 10;
+  }
+
+  for (let i = 0; i < obstacles.length; i++) {
+    const obstacle = obstacles[i];
+    if (ballPosY < obstacle.offsetTop + obstacle.offsetHeight &&
+        ballPosX + ball.offsetWidth > obstacle.offsetLeft &&
+        ballPosX < obstacle.offsetLeft + obstacle.offsetWidth) {
+      ballPosY = obstacle.offsetTop + obstacle.offsetHeight;
+      ballSpeedY = 0;
+      ballColor = getRandomColor();
     }
+  }
 
-    if (ballPosX > gameContainer.offsetWidth - ball.offsetWidth || ballPosX < 0) {
-        ballSpeedX = -ballSpeedX;
-        ballColor = getRandomColor();
-    }
+  if (ballPosY < 0) {
+    ballPosY = 0;
+    ballSpeedY = -ballSpeedY;
+    ballColor = getRandomColor();
+  } else if (ballPosY > gameContainer.offsetHeight - ball.offsetHeight) {
+    ballPosY = gameContainer.offsetHeight - ball.offsetHeight;
+    ballSpeedY = -ballSpeedY;
+    ballColor = getRandomColor();
+  }
 
-    ball.style.top = ballPosY + "px";
-    ball.style.left = ballPosX + "px";
-    ball.style.backgroundColor = ballColor;
+  if (ballPosX > gameContainer.offsetWidth - ball.offsetWidth ||
+      ballPosX < 0) {
+    ballSpeedX = -ballSpeedX;
+    ballColor = getRandomColor();
+  }
+
+  ball.style.top = `${ballPosY}px`;
+  ball.style.left = `${ballPosX}px`;
+  ball.style.backgroundColor = ballColor;
+
+  checkGameOver();
 }
 
-function updateObstacle() {
-	obstaclePosX += obstacleSpeed;
-
-	if (obstaclePosX > gameContainer.offsetWidth - obstacle.offsetWidth || obstaclePosX < 0) {
-		obstacleSpeed = -obstacleSpeed;
-	}
-
-	obstacle.style.left = obstaclePosX + "px";
+function updateObstacles() {
+  for (let i = 0; i < obstacles.length; i++) {
+    const obstacle = obstacles[i];
+    let obstaclePosX = parseInt(obstacle.style.left) || 0;
+    obstaclePosX += obstacleSpeed;
+    if (obstaclePosX > gameContainer.offsetWidth - obstacle.offsetWidth ||
+        obstaclePosX < 0) {
+      obstacleSpeed = -obstacleSpeed;
+    }
+    obstacle.style.left = `${obstaclePosX}px`;
+  }
 }
+
+function checkGameOver() {
+  for (let i = 0; i < obstacles.length; i++) {
+    const obstacle = obstacles[i];
+    if (ballPosY + ball.offsetHeight > obstacle.offsetTop &&
+        ballPosX + ball.offsetWidth > obstacle.offsetLeft &&
+        ballPosX < obstacle.offsetLeft + obstacle.offsetWidth) {
+      ballExplosion();
+      setTimeout(() => {
+        alert("Game Over!");
+        window.location.reload();
+      }, 500);
+      return;
+    }
+  }
+}
+
+
 
 function ballExplosion() {
-	clearInterval(gameLoop);
-	ball.style.animation = "explode 0.5s linear forwards";
+    clearInterval(gameLoop);
+    ball.style.animation = "explode 0.5s linear forwards";
 }
 
 function getRandomColor() {
-	var letters = "0123456789ABCDEF";
-	var color = "#";
-	for (var i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
-gameLoop = setInterval(function() {
-	updateBall();
-	updateObstacle();
+gameLoop = setInterval(() => {
+    updateBall();
+    updateObstacles();
 }, 50);
