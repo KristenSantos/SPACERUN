@@ -42,7 +42,7 @@ h5 {
   position: relative;
   z-index: 3;
 }
-img {
+/* img {
   height: 8em;
   margin-left: auto;
   margin-right:auto;
@@ -51,7 +51,7 @@ img {
   position: relative;
   display: block;
   z-index: 3;
-}
+} */
 
 @keyframes move-twink-back {
     from {background-position:0 0;}
@@ -99,7 +99,7 @@ z-index: 3;
 display: grid;
 margin-top: 40px;
 }
-#Home{
+#Restart{
     background-color: #F155C1;
     /* opacity: .5; */
     height: 4em;
@@ -114,6 +114,10 @@ h3{
 display: block;
 position: relative;
 z-index: 3;
+font-weight: 900;
+font-size: xxx-large;
+padding-top: 20px;
+font-style: italic;
 }
 #box{
     display: block;
@@ -123,9 +127,13 @@ z-index: 3;
     height: 214px;
     width: 413px;
     opacity: 0.5;
+    margin-top: 85px;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
     font-family: monospace;
     font-size: xx-large;
+}
+p{
+    padding-top: 20px;
 }
