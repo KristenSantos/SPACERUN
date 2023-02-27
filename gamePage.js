@@ -1,137 +1,71 @@
-const ball = document.getElementById("ball");
-const obstacles = document.querySelectorAll(".obstacle");
-const gameContainer = document.getElementById("game-container");
+///////////////////
+///Ball Control///
+/////////////////
 
-let ballSpeedX = 0;
-let ballSpeedY = 0;
-let ballPosX = gameContainer.offsetWidth / 2 - ball.offsetWidth / 2;
-let ballPosY = gameContainer.offsetHeight - ball.offsetHeight;
-let ballColor = "red";
+const ball = document.querySelector('#ball');
+const ballSection = document.querySelector('#ballSection');
 
-let obstacleSpeed = 5;
-let obstaclePosX = 0;
-let obstacleSpacing = 100;
-let obstaclePosY = obstacleSpacing;
+// Set the initial position and velocity of the ball
+let ballPosition = 0;
+let ballVelocity = 0;
 
-for (let i = 0; i < obstacles.length; i++) {
-  const obstacle = obstacles[i];
-  obstacle.style.top = `${obstaclePosY}px`;
-  obstaclePosY += obstacleSpacing;
+// Define a function to update the position of the ball
+function updateBallPosition() {
+  ball.style.bottom = ballPosition + 'px';
 }
 
-let gameLoop;
-let gameStarted = false;
-let spaceKeyDown = false;
-
-document.addEventListener("keydown", (event) => {
-  if (event.code === "Space" && !gameStarted) {
-    gameStarted = true;
-    ballSpeedY = -10;
-  } else if (event.code === "Space") {
-    spaceKeyDown = true;
+// Add an event listener for the space bar keydown event
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'Space') {
+    ballVelocity = 5;
   }
 });
 
-document.addEventListener("keyup", (event) => {
-  if (event.code === "Space") {
-    spaceKeyDown = false;
-    ballSpeedY = 10;
+// Add an event listener for the space bar keyup event
+document.addEventListener('keyup', function(event) {
+  if (event.code === 'Space') {
+    ballVelocity = -2;
   }
 });
 
-function updateBall() {
-  if (!gameStarted) {
-    return;
+// Define a function to update the position of the ball based on its velocity
+function updateBallVelocity() {
+  ballPosition += ballVelocity;
+  if (ballPosition < 0) {
+    ballPosition = 0;
+    ballVelocity = 0;
   }
-  ballPosX += ballSpeedX;
-  ballPosY += ballSpeedY;
+  updateBallPosition();
 
-  if (spaceKeyDown) {
-    ballSpeedY = -10;
-  } else {
-    ballSpeedY = 10;
+  // Check if the ball has reached the top of the ball section and move the section up if it has
+  if (ballPosition > (ballSection.offsetHeight - ball.offsetHeight)) {
+    ballSection.style.top = -(ballPosition - (ballSection.offsetHeight - ball.offsetHeight)) + 'px';
   }
-
-  for (let i = 0; i < obstacles.length; i++) {
-    const obstacle = obstacles[i];
-    if (ballPosY < obstacle.offsetTop + obstacle.offsetHeight &&
-        ballPosX + ball.offsetWidth > obstacle.offsetLeft &&
-        ballPosX < obstacle.offsetLeft + obstacle.offsetWidth) {
-      ballPosY = obstacle.offsetTop + obstacle.offsetHeight;
-      ballSpeedY = 0;
-      ballColor = getRandomColor();
-    }
-  }
-
-  if (ballPosY < 0) {
-    ballPosY = 0;
-    ballSpeedY = -ballSpeedY;
-    ballColor = getRandomColor();
-  } else if (ballPosY > gameContainer.offsetHeight - ball.offsetHeight) {
-    ballPosY = gameContainer.offsetHeight - ball.offsetHeight;
-    ballSpeedY = -ballSpeedY;
-    ballColor = getRandomColor();
-  }
-
-  if (ballPosX > gameContainer.offsetWidth - ball.offsetWidth ||
-      ballPosX < 0) {
-    ballSpeedX = -ballSpeedX;
-    ballColor = getRandomColor();
-  }
-
-  ball.style.top = `${ballPosY}px`;
-  ball.style.left = `${ballPosX}px`;
-  ball.style.backgroundColor = ballColor;
-
-  checkGameOver();
 }
+ 
+// Set an interval to update the position of the ball every 20 milliseconds
+setInterval(updateBallVelocity, 20);
 
-function updateObstacles() {
-  for (let i = 0; i < obstacles.length; i++) {
-    const obstacle = obstacles[i];
-    let obstaclePosX = parseInt(obstacle.style.left) || 0;
-    obstaclePosX += obstacleSpeed;
-    if (obstaclePosX > gameContainer.offsetWidth - obstacle.offsetWidth ||
-        obstaclePosX < 0) {
-      obstacleSpeed = -obstacleSpeed;
-    }
-    obstacle.style.left = `${obstaclePosX}px`;
+///////////////////
+//Obstcle Control/
+/////////////////
+
+const obstacle = document.querySelector('.obstacles');
+
+// Set the initial position and direction of the obstacle
+let obstaclePosition = 0;
+let obstacleDirection = 1;
+
+// Define a function to update the position of the obstacle
+function updateObstaclePosition() {
+  obstaclePosition += obstacleDirection;
+  obstacle.style.left = obstaclePosition + 'px';
+
+  // Reverse direction if obstacle reaches the edge of the screen
+  if (obstaclePosition >= (window.innerWidth - obstacle.offsetWidth) || obstaclePosition <= 0) {
+    obstacleDirection *= -1;
   }
 }
 
-function checkGameOver() {
-  for (let i = 0; i < obstacles.length; i++) {
-    const obstacle = obstacles[i];
-    if (ballPosY + ball.offsetHeight > obstacle.offsetTop &&
-        ballPosX + ball.offsetWidth > obstacle.offsetLeft &&
-        ballPosX < obstacle.offsetLeft + obstacle.offsetWidth) {
-      ballExplosion();
-      setTimeout(() => {
-        alert("Game Over!");
-        window.location.reload();
-      }, 500);
-      return;
-    }
-  }
-}
-
-
-
-function ballExplosion() {
-    clearInterval(gameLoop);
-    ball.style.animation = "explode 0.5s linear forwards";
-}
-
-function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-gameLoop = setInterval(() => {
-    updateBall();
-    updateObstacles();
-}, 50);
+// Set an interval to update the position of the obstacle every 10 milliseconds
+setInterval(updateObstaclePosition, 0.01);

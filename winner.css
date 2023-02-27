@@ -96,7 +96,7 @@ background-color: black;
     z-index: 3;
 }
 
-#winner {
+#status {
     font-size: 4rem;
     opacity: 1;
     letter-spacing: .4rem;
@@ -104,14 +104,25 @@ background-color: black;
 }
 
 #pointsHeader {
-    color: black;
+    color: #1BC250;
     font-size: 2.2rem;
     margin-top: -3rem;
+    animation: animatePoints 200s ease-in infinite
 }
 
 #points {
-    color: #000;
+    color: #1BC250;
     font-size: 4rem;
+    animation: animatePoints 200s ease-in infinite
+}
+@keyframes animatePoints {
+  from {
+    text-shadow: 0 0 20px#0EAA3E;
+  }
+  to {
+    text-shadow: 0 0 30px #0EAA3E, 
+                0 0 10px #0EAA3E 
+  }
 }
 
 

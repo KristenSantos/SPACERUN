@@ -1,89 +1,106 @@
-#game-container {
-	width: 400px;
-	position: relative;
-	margin: 0 auto;
-	z-index: 3; 
+* {
+  margin: 0;
+  padding: 0;
 }
+body{
+background-color: black;
+height: 100vh;
+width: 100vw;
 
-#ball {
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	background-color: red;
-	position: absolute;
-	top: 0;
-    left: 50%;
-    transform: translateX(-50%);
 }
-
-.obstacle {
-	width: 100px;
-	height: 20px;
-	background-color: green;
-	position: absolute;
-	top: 100px;
-	left: 0;
+#ballSection{
+height: 100vh;
+width: 100vw;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+position: relative; /* Added to make sure the section moves up relative to the body */
 }
-
-@keyframes animate {
-  from {
-    text-shadow: 0 0 20px #F155C1;
-  }
-  to {
-    text-shadow: 0 0 30px #F155C1, 
-                0 0 10px #F155C1 
-  }
-}
-
-@keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
-}
-
-@keyframes move-clouds-back {
-    from {background-position:0 0;}
-    to {background-position:10000px 0;}
-}
-
 .stars, .twinkling, .clouds {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
-  display:block;
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+width:100%;
+height:100%;
+display:block;
 }
 
-.stars {
-  background:#000 url(stars.png) repeat top center;
-  z-index:0;
+.stars{
+background:#000 url(stars.png) repeat top center;
+z-index:0;
 }
 
 .twinkling{
-  background:transparent url(twinkling.png) repeat top center;
-  z-index:1;
-  animation:move-twink-back 200s linear infinite;
+background:transparent url(twinkling.png) repeat top center;
+z-index:1;
+animation:move-twink-back 200s linear infinite;
 }
 
 .clouds{
-    background:transparent url(clouds.png) repeat top center;
-    z-index:2;
-    opacity: .4;
-   animation:move-clouds-back 200s linear infinite;
-}
-img {
-  height: 12em;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top: 1em;
-  transform: rotate(-33deg);
-  position: relative;
-  display: block;
-  z-index: 3;
+  background:transparent url(clouds.png) repeat top center;
+  z-index:2;
+  opacity: .4;
+ animation:move-clouds-back 200s linear infinite;
 }
 
-#ball, .obstacle {
-  z-index: 4;
+/* #ball {
+width: 25px;
+height: 25px;
+border-radius: 50%;
+background-color: #FF10F0;
+margin-left: 0;
+margin-right: 0;
+position: relative;
+z-index: 3; 
+} */
+
+#ball{
+background-color: #F155C1;;
+height: 50px;
+width: 25px;
+border-radius: 50% 50% 0 0;
+position: relative;
+left: -11px;
+top: 115px;
+z-index: 3;
 }
+
+#ball:before{
+position: absolute;
+content: "";
+background-color: #F155C1;;
+height: 20px;
+width: 55px;
+z-index: -1;
+border-radius: 50% 50% 0 0;
+right: -15px;
+bottom: 0;
+z-index: 3;
+}
+#ball:after{
+position: absolute;
+content: "";
+background-color: #F155C1;;
+height: 4px;
+width: 15px;
+border-radius: 0 0 2px 2px;
+bottom: -4px;
+left: 4.3px;
+z-index: 3;
+}
+
+
+
+
+.obstacles {
+width: 10rem;
+height: 1.5rem;
+background-color: green;
+position: absolute;
+z-index: 3;
+top: 25rem;
+left: 0;
+}
+

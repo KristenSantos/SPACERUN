@@ -1,45 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Bouncing Ball</title>
-	<link rel="stylesheet" type="text/css" href="gamePage.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="gamePage.js" defer></script>
-	<link href='https://fonts.googleapis.com/css?family=Lilita One' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Itim' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="gamePage.js" defer></script>
+
+    <link rel="stylesheet" href="gamePage.css">
 </head>
 <body>
-    
-    
-    
-    <div id="spaceshipImg">
-        <div id="spaceship">
-            <img src="neonspaceship.png" alt="spaceship">
-        </div>
-    </div>
-
     <section id="backgroundItems">
-        <div class="stars"></div>
-        <div class="twinkling"></div> 
-        <div class="clouds"></div>
-    </section> 
-    
-    
-	<div id="game-container">
-		
-		<div class="obstacle" id="obstacle1"></div>
-        <div class="obstacle" id="obstacle2"></div>
-        <div class="obstacle" id="obstacle3"></div>
-        <div class="obstacle" id="obstacle4"></div>
-        <div class="obstacle" id="obstacle5"></div>
-        <div class="obstacle" id="obstacle6"></div>
-        <div class="obstacle" id="obstacle7"></div>
-        <div class="obstacle" id="obstacle8"></div>
-		
-		<div id="ball"></div>
-	</div>
-	
-	
-	
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+    </section>
+    <section id='ballSection'>
+        <div id='ball'>
+        </div>
+    </section>
+    <section class="obstacles">
+        <div class="movingRectangle"></div>
+    </section>
+
+      
 </body>
-</html>
+</html> 
