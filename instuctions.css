@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+  }
+  body{
+    background:#000 url(Sound&Pics/spacebackground.webp) repeat top center
+  }
+  
+  .title, h1 {
+    font-size: 6em;
+    font-family: 'Lilita One';
+    margin-top: 0.5em;
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+    letter-spacing: 8px;
+  
+    /* Stryling the text and giving it gradiant */
+    color:#F77CCD;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    animation: animate 200s ease-in infinite
+  }
+
+  @keyframes animate {
+  from {
+    text-shadow: 0 0 20px #F155C1;
+  }
+  to {
+    text-shadow: 0 0 30px #F155C1, 
+                0 0 10px #F155C1 
+  }
+  }
+  
+  @keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+  }
+  
+  @keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+  }
+
+  
+  #middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: white;
+    background-color:rgba(217, 215, 215, 0.302);
+    font-family: 'Lilita One';
+    height: 70vh;
+    width: 31vw;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right:auto;
+    border-radius: 1rem;
+    position: relative;
+    z-index: 3;
+  }
+  
+  #instructions {
+    font-size: 4rem;
+    opacity: 1;
+    letter-spacing: .4rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  #lines {
+    color: #1BC250;
+    font-size: 1.8rem;
+    margin-top: -3rem;
+    animation: animatePoints 200s ease-in infinite
+  }
+  p{
+    margin-top: 2.5rem;
+  }
+  
+  
+  @keyframes animatePoints {
+  from {
+    text-shadow: 0 0 20px#0EAA3E;
+  }
+  to {
+    text-shadow: 0 0 30px #0EAA3E, 
+                0 0 10px #0EAA3E 
+  }
+  }
+  
+  #home {
+    background-color:#F77CCD;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-bottom: 2em;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-family: 'Itim';
+    border: #F77CCD 0.125em solid;
+    color: #eee;
+    margin-bottom: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25em .7em;
+    height: 3.5rem;
+    width: 10rem;
+    border-radius: .3em ;
+    text-shadow: 0 0 0.125em #F155C1, 0 0 0.25em white;
+    box-shadow: inset 0 0 .5em 0 #F155C1, 0 0 .5em 0 #F155C1;
+  }
+  
+  #home:hover {
+    background-color: black;
+    color: white;
+  }
