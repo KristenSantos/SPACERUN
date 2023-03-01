@@ -16,3 +16,30 @@ pauseBut.style.cssText = screenWidthStyle;
 homeBut.style.cssText = screenWidthStyle;
 pausePage.style.cssText  = screenWidthStyle;
 overMessage.style.cssText = screenWidthStyle;
+
+function Over() {
+    gameOver.play();
+    overMessage.style.display = 'flex';
+    pauseBut.style.display = 'none';
+    homeBut.style.display = 'flex';
+    pauseMain.style.cssText = 'z-index:4';
+}
+function gameStart() {
+    homePage.style.display = 'none';
+    pauseBut.style.display = 'flex';
+}
+function gameResumed() {
+    pausePage.style.display = 'none';
+    homeBut.style.display = 'none';
+    pauseBut.style.display = 'flex';
+    pauseMain.style.cssText = 'z-index:2';
+}
+function gamePaused() {
+    pausePage.style.display = 'flex';
+    homeBut.style.display = 'flex';
+    pauseBut.style.display = 'none';
+    pauseMain.style.cssText = 'z-index:4';
+}
+function mainMenu() {
+    window.location.reload();
+}
