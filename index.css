@@ -45,25 +45,13 @@ animation:move-twink-back 200s linear infinite;
  animation:move-clouds-back 200s linear infinite;
 }
 
-/* #ball {
-width: 25px;
-height: 25px;
-border-radius: 50%;
-background-color: #FF10F0;
-margin-left: 0;
-margin-right: 0;
-position: relative;
-z-index: 3; 
-} */
 
 #ball{
 background-color: #F155C1;;
 height: 50px;
 width: 25px;
 border-radius: 50% 50% 0 0;
-position: relative;
-left: -11px;
-top: 115px;
+position: absolute;
 z-index: 3;
 }
 
@@ -94,7 +82,7 @@ z-index: 3;
 
 
 
-.obstacles {
+.movingRectangle {
 width: 10rem;
 height: 1.5rem;
 background-color: green;
@@ -104,3 +92,14 @@ top: 25rem;
 left: 0;
 }
 
+.movingRectangle1 {
+  width: 10rem;
+  height: 1.5rem;
+  background-color: rgb(255, 57, 90);
+  position: absolute;
+  z-index: 3;
+  top: 25rem;
+  left: 0;
+  }
+
+  
