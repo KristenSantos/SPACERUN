@@ -117,7 +117,7 @@ function gameBall() {
 //OBSTACLES//
 ////////////
 
-var angle = 0;
+let angle = 0;
 let Obstacles = [
     function circleObs (r, distanceObs, d) {
         this.r = r;
@@ -129,7 +129,7 @@ let Obstacles = [
         ctx.translate(this.x,this.y);
         ctx.rotate(this.direction*c*Math.PI/180);
         ctx.translate(-this.x,-this.y);
-        for(var i = 0; i <= 3; i++) {
+        for(let i = 0; i <= 3; i++) {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, (0 + angle)*Math.PI/180, (90 + angle)*Math.PI/180);
             angle += 90;
@@ -150,14 +150,13 @@ let Obstacles = [
         ctx.translate(this.x,this.y);
         ctx.rotate(this.direction*c*Math.PI/180);
         ctx.translate(-this.x,-this.y);
-        for(var i = 0; i <= 3; i++) {
+        for(let i = 0; i <= 3; i++) {
             ctx.beginPath();
             ctx.translate(this.x, this.y);
             ctx.rotate(angle*Math.PI/180);
             ctx.translate(-this.x, -this.y);
             angle += 90;
             ctx.moveTo(this.x - this.r, this.y);
-            // this.parts == 2 ? ctx.lineTo(this.x + this.r, this.y) : ctx.lineTo(this.x, this.y);
             ctx.lineTo(this.x, this.y);
             ctx.lineCap = "round";
             ctx.lineWidth = 20;
@@ -172,7 +171,7 @@ let Obstacles = [
 //SCORE//
 ////////
 
-var highScore = JSON.parse(localStorage.getItem('CSH')) || [];
+let highScore = JSON.parse(localStorage.getItem('CSH')) || [];
 highScore.sort(function(a, b){return b - a;});
 highScore.splice(5);
 function gameScore() {
@@ -194,7 +193,7 @@ let bMax = [100, 200, 162, 255];
 let rMin = [220, 72, 200, 0];
 let gMin = [183, 0, 0, 138];
 let bMin = [0, 100, 100, 184];
-var gameRunning = true;
+let gameRunning = true;
 function collision() {
     pixel1 = ctx.getImageData(gamePiece.x - 3, gamePiece.y - 2, 6, 1).data;
     pixel2 = ctx.getImageData(gamePiece.x - 3, gamePiece.y + 2, 6, 1).data;
@@ -229,18 +228,18 @@ function gamePause() {
     }
 }
 //UPDATING GAME AREA//
-var i = 0;
-var j = 0;
-var r = 0;
-var direcType = [];
-var obsType = [];
-var radType = []; 
-var disType = [];
-var myArr = [0,1,2,3];
-var someArr = [1,-1];
-var t = 4;
-var score = 0;
-for(var k = 0; k < myArr.length; k++) {
+let i = 0;
+let j = 0;
+let r = 0;
+let direcType = [];
+let obsType = [];
+let radType = []; 
+let disType = [];
+let myArr = [0,1,2,3];
+let someArr = [1,-1];
+let t = 4;
+let score = 0;
+for(let k = 0; k < myArr.length; k++) {
     j = Math.floor(Math.random() * 2);
     r = Math.floor(Math.random() * (151 - 90)) + 90;
     direcType.push(someArr[j]);
@@ -249,7 +248,7 @@ for(var k = 0; k < myArr.length; k++) {
     disType.push(i);
     i -= 450;
 }
-var luck = 0;
+let luck = 0;
 //.................UPDATE GAME AREA....................//
 function updateGameArea() {
     gameArea.clear();
@@ -270,7 +269,7 @@ function updateGameArea() {
             disType.push(i);
         i -= 450;
     }
-    for(var k = 0; k < myArr.length; k++) {
+    for(let k = 0; k < myArr.length; k++) {
         Obstacles[obsType[myArr[k]]](radType[myArr[k]], disType[myArr[k]], direcType[myArr[k]]);
     }
     if(Obstacles.y > 0) {   
