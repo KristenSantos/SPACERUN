@@ -70,3 +70,46 @@ let gameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 };
+//CREATED GAMEBALL//
+let color = ['rgb(255, 215, 0)','rgb(110, 15, 179)','rgb(255, 20, 147)','rgb(0, 191, 255)'];
+let c = 0;
+let by = 200;
+let dy = 0 ;
+let distance = 0;
+let ctx;
+let bI = Math.floor(Math.random() * 4);
+let ballColor = color[bI];
+function gameBall() {
+    ctx = gameArea.context;
+    this.canvasHeight = gameArea.canvas.height;
+    this.x = (gameArea.canvas.width)/2;
+    this.y = gameArea.canvas.height -  250;
+    this.color = ballColor;
+    ctx.beginPath();
+    this.update = function() {
+        ctx.arc(this.x, this.y, 10, 0, 2*Math.PI);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        let x = dy;
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                gameTap.play();
+                dy = 2;
+                distance = 0;
+            }
+        });
+        if(gamePiece.y < Math.floor(gamePiece.canvasHeight/2)) {     
+            by += 8;   
+            score++;
+        } 
+        if((gamePiece.y >= gamePiece.canvasHeight - 15) && (gamePiece.y <= gamePiece.canvasHeight - 13)) {
+            dy = 0;
+        }
+        if((distance == 11) || (gamePiece.y < Math.floor(gamePiece.canvasHeight/2))) {     
+            dy = -1;     
+        }
+        gamePiece.y -= 3*x; 
+        distance++;
+    };
+    ctx.closePath();
+}
