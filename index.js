@@ -113,3 +113,55 @@ function gameBall() {
     };
     ctx.closePath();
 }
+//........OBSTACLES.........//
+var angle = 0;
+let Obstacles = [
+    function circleObs (r, distanceObs, d) {
+        this.r = r;
+        this.direction = d;
+        this.distanceObs = distanceObs;
+        this.x = gameArea.canvas.width/2;
+        this.y = by + this.distanceObs;
+        ctx.save();
+        ctx.translate(this.x,this.y);
+        ctx.rotate(this.direction*c*Math.PI/180);
+        ctx.translate(-this.x,-this.y);
+        for(var i = 0; i <= 3; i++) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, (0 + angle)*Math.PI/180, (90 + angle)*Math.PI/180);
+            angle += 90;
+            ctx.lineWidth = 20;
+            ctx.strokeStyle = color[i];
+            ctx.stroke();
+            ctx.closePath();
+        }
+        ctx.restore();
+    },
+    function plusObs (r, distanceObs, d) {
+        this.r = r;
+        this.direction = d;
+        this.distanceObs = distanceObs;
+        this.y = by + distanceObs;
+        this.x = gameArea.canvas.width/2 + this.r/1.3*this.direction;
+        ctx.save();
+        ctx.translate(this.x,this.y);
+        ctx.rotate(this.direction*c*Math.PI/180);
+        ctx.translate(-this.x,-this.y);
+        for(var i = 0; i <= 3; i++) {
+            ctx.beginPath();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(angle*Math.PI/180);
+            ctx.translate(-this.x, -this.y);
+            angle += 90;
+            ctx.moveTo(this.x - this.r, this.y);
+            // this.parts == 2 ? ctx.lineTo(this.x + this.r, this.y) : ctx.lineTo(this.x, this.y);
+            ctx.lineTo(this.x, this.y);
+            ctx.lineCap = "round";
+            ctx.lineWidth = 20;
+            ctx.strokeStyle = color[i];
+            ctx.stroke();
+            ctx.closePath();
+        }
+        ctx.restore();
+    }
+];
