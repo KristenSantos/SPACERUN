@@ -1,105 +1,240 @@
-* {
+body {
   margin: 0;
-  padding: 0;
-}
-body{
-background-color: black;
-height: 100vh;
-width: 100vw;
-
-}
-#ballSection{
-height: 100vh;
-width: 100vw;
-display: flex;
-justify-content: center;
-align-items: flex-end;
-position: relative; /* Added to make sure the section moves up relative to the body */
-}
-.stars, .twinkling, .clouds {
-position:absolute;
-top:0;
-left:0;
-right:0;
-bottom:0;
-width:100%;
-height:100%;
-display:block;
+  display: flex;
+  justify-content: center;
+  background-image: url(Sound&Pics/spacebackground.webp);
+  z-index: 0;
 }
 
-.stars{
-background:#000 url(stars.png) repeat top center;
-z-index:0;
+#high-score {
+  font-family: 'Lilita One';
 }
 
-.twinkling{
-background:transparent url(twinkling.png) repeat top center;
-z-index:1;
-animation:move-twink-back 200s linear infinite;
+#points {
+  color: #1BC250;
+  animation: animatePoints 200s ease-in infinite;
+  margin-left: 10px;
+}
+@keyframes animatePoints {
+from {
+  text-shadow: 0 0 20px#0EAA3E;
+}
+to {
+  text-shadow: 0 0 30px #0EAA3E, 
+              0 0 10px #0EAA3E 
+}
+}
+#title{
+  font-family: 'Lilita One';
+  animation: animate 200s ease-in infinite;
+  color:#F77CCD;
+  font-size: 5rem;
+  letter-spacing: 1rem;
+  margin-top: 50px
 }
 
-.clouds{
-  background:transparent url(clouds.png) repeat top center;
-  z-index:2;
-  opacity: .4;
- animation:move-clouds-back 200s linear infinite;
-}
-
-
-#ball{
-background-color: #F155C1;;
-height: 50px;
-width: 25px;
-border-radius: 50% 50% 0 0;
-position: absolute;
-z-index: 3;
-}
-
-#ball:before{
-position: absolute;
-content: "";
-background-color: #F155C1;;
-height: 20px;
-width: 55px;
-z-index: -1;
-border-radius: 50% 50% 0 0;
-right: -15px;
-bottom: 0;
-z-index: 3;
-}
-#ball:after{
-position: absolute;
-content: "";
-background-color: #F155C1;;
-height: 4px;
-width: 15px;
-border-radius: 0 0 2px 2px;
-bottom: -4px;
-left: 4.3px;
-z-index: 3;
-}
-
-
-
-
-.movingRectangle {
-width: 10rem;
-height: 1.5rem;
-background-color: green;
-position: absolute;
-z-index: 3;
-top: 25rem;
-left: 0;
-}
-
-.movingRectangle1 {
-  width: 10rem;
-  height: 1.5rem;
-  background-color: rgb(255, 57, 90);
-  position: absolute;
-  z-index: 3;
-  top: 25rem;
-  left: 0;
+@keyframes animate {
+  from {
+    text-shadow: 0 0 20px #F155C1;
+  }
+  to {
+    text-shadow: 0 0 30px #F155C1, 
+                0 0 10px #F155C1 
+  }
   }
 
+#pause-main{
+  display: flex;
+  height: 100%;
+  position: absolute;
+  justify-content: center;
+  font-family: 'Monoton';
+  z-index: 2;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
   
+}
+#pause{
+  display: none;
+  flex-direction: row;
+  top: 20px;
+  margin-left: -20px;
+  position: absolute;
+  justify-content: flex-end;
+}
+#pause2{
+  width: 50px;
+}
+
+#pause2:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+#home{
+  display: none;
+  flex-direction: row;
+  top: 20px;
+  margin-left: -20px;
+  position: absolute;
+  justify-content: flex-end;
+}
+#home2 {
+  width: 50px;
+}
+
+#home2:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+canvas{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+#game-paused{
+  display: none;
+  height: 100%;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  background-color: rgb(59, 59, 59, 0.6);
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+}
+#play{
+  height: 200px;
+  position: absolute;
+  z-index: 3;
+}
+#play:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 1.2s;
+}
+#game-over{
+  display: none;
+  height: 100%;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background-color: rgb(59, 59, 59, 0.7);
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+}
+#over{
+  color: red;
+  font-family: 'Monoton';
+  font-size: 50px;
+  text-align: center;
+  height: 200px;
+  position: absolute;
+  z-index: 2;
+}
+
+#main{
+  display: block;
+  height: 100%;
+  position: absolute;
+  color: whitesmoke;
+
+  
+  -webkit-user-select: none !important;
+}
+
+#play-main{
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+#howTo{
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -100px; 
+}
+.play-main1{
+  z-index: 3;
+  position: absolute;
+  animation-name: pulse_animation;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  background-color:#F77CCD;
+  font-family: 'Itim';
+  font-size: 1.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  border: #F77CCD 0.125em solid;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25em .7em;
+  height: 3.5rem;
+  width: 10rem;
+  border-radius: .3em ;
+  text-shadow: 0 0 0.125em #F155C1, 0 0 0.25em white;
+  box-shadow: inset 0 0 .5em 0 #F155C1, 0 0 .5em 0 #F155C1;
+}
+@keyframes pulse_animation {
+  0% { transform: scale(1); }
+  12.5% { transform: scale(1.1); }
+  25% { transform: scale(1); }
+  37.5% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  62.5% { transform: scale(1.1); }
+  75% { transform: scale(1); }
+  87.5% { transform: scale(1.1); }
+  100% { transform: scale(1);}
+}
+
+#rocket {
+width: 200px;
+height: 200px;
+transform: rotate(-34deg);
+margin-top: 10px;
+margin-left: 175px;
+}
+
+#play-main1:hover{
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+#high-score{
+  width: 100%;
+  display: flex;
+  position: absolute;
+  top: 10px;
+  font-size: 25px;
+  justify-content: center;
+}
+#coders{
+  font-family: itim;
+  display: flex;
+  justify-content: center;
+}
+
+#over {
+  font-family: 'Lilita One';
+  animation: animate 200s ease-in infinite;
+  color:#F77CCD;
+}
+#tapHome{
+  color: #1BC250;
+  animation: animatePoints 200s ease-in infinite;
+  font-size:20px;
+  font-family: 'Itim';
+}
