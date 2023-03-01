@@ -250,3 +250,46 @@ for(var k = 0; k < myArr.length; k++) {
     i -= 450;
 }
 var luck = 0;
+//.................UPDATE GAME AREA....................//
+function updateGameArea() {
+    gameArea.clear();
+    multiColorBall();
+    if(gamePiece.y - bH >= 35 && gamePiece.y - bH <= 50) {
+        gamePiece.color = color[Math.floor(Math.random() * 4)];
+        bI = color.indexOf(gamePiece.color);
+        luck -= 900;
+    }
+    if(Obstacles.y > -10) {
+        direcType.shift();
+            direcType.push(someArr[j]);
+        obsType.shift();
+            obsType.push(Math.floor(Math.random() * 2));
+        radType.shift();
+            radType.push(Math.floor(Math.random() * (151 - 90)) + 90);
+        disType.shift();
+            disType.push(i);
+        i -= 450;
+    }
+    for(var k = 0; k < myArr.length; k++) {
+        Obstacles[obsType[myArr[k]]](radType[myArr[k]], disType[myArr[k]], direcType[myArr[k]]);
+    }
+    if(Obstacles.y > 0) {   
+        myArr.shift();  
+        myArr.push(t);
+        t++;  
+    }
+    c += 1;
+    if(c == 360) {  
+        c = 0; 
+    }
+    if(angle == 360) {  
+        angle = 0; 
+    }
+    collision();
+    gameScore();
+    gamePiece.update();
+    if(gameRunning) {
+        requestAnimationFrame(updateGameArea);
+    }
+}
+showHighScore.innerHTML = highScore.length != 0 ?  highScore[0] : 'No Score';
