@@ -213,3 +213,40 @@ function collision() {
         }
     }
 }
+//GAME COMPONENTS//
+function multiColorBall() {
+    bW = gameArea.canvas.width/2;
+    bH = luck + by;
+    this.image = new Image();
+    this.image.src = 'Sound&Pics/round-star.svg';
+    ctx.drawImage(this.image, bW - 10, bH, 20, 20); 
+} 
+//GAME PAUSE//
+function gamePause() {
+    gameRunning = !gameRunning;
+    if(gameRunning) {
+        updateGameArea();
+    }
+}
+//UPDATING GAME AREA//
+var i = 0;
+var j = 0;
+var r = 0;
+var direcType = [];
+var obsType = [];
+var radType = []; 
+var disType = [];
+var myArr = [0,1,2,3];
+var someArr = [1,-1];
+var t = 4;
+var score = 0;
+for(var k = 0; k < myArr.length; k++) {
+    j = Math.floor(Math.random() * 2);
+    r = Math.floor(Math.random() * (151 - 90)) + 90;
+    direcType.push(someArr[j]);
+    obsType.push(j);
+    radType.push(r); 
+    disType.push(i);
+    i -= 450;
+}
+var luck = 0;
