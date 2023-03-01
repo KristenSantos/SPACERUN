@@ -113,7 +113,10 @@ function gameBall() {
     };
     ctx.closePath();
 }
-//........OBSTACLES.........//
+//////////////
+//OBSTACLES//
+////////////
+
 var angle = 0;
 let Obstacles = [
     function circleObs (r, distanceObs, d) {
@@ -165,3 +168,48 @@ let Obstacles = [
         ctx.restore();
     }
 ];
+//////////
+//SCORE//
+////////
+
+var highScore = JSON.parse(localStorage.getItem('CSH')) || [];
+highScore.sort(function(a, b){return b - a;});
+highScore.splice(5);
+function gameScore() {
+    ctx.font = "50px" + " " + "monospace";
+    ctx.fillStyle = "whitesmoke";
+    ctx.fillText(score, 20, 60);
+}
+//////////////
+//COLLISION//
+////////////
+let rgb = 'rgb(0, 0, 0)';
+let pixel1;
+let pixel2;
+let rgb1;
+let rgb2;
+let rMax = [255, 170, 255, 117];
+let gMax = [255, 40, 100, 220];
+let bMax = [100, 200, 162, 255];
+let rMin = [220, 72, 200, 0];
+let gMin = [183, 0, 0, 138];
+let bMin = [0, 100, 100, 184];
+var gameRunning = true;
+function collision() {
+    pixel1 = ctx.getImageData(gamePiece.x - 3, gamePiece.y - 2, 6, 1).data;
+    pixel2 = ctx.getImageData(gamePiece.x - 3, gamePiece.y + 2, 6, 1).data;
+    rgb1 = 'rgb(' + pixel1[0] + ', ' + pixel1[1] +', ' + pixel1[2] +')';
+    rgb2 = 'rgb(' + pixel2[0] + ', ' + pixel2[1] +', ' + pixel2[2] +')';
+    
+    if(rgb1 != rgb || rgb2 != rgb) {
+        if((pixel1[0] >= rMin[bI] && pixel1[1] >= gMin[bI] && pixel1[2] >= bMin[bI] && pixel1[0] <= rMax[bI] && pixel1[1] <= gMax[bI] && pixel1[2] <= bMax[bI]) || (pixel2[0] >= rMin[bI] && pixel2[1] >= gMin[bI] && pixel2[2] >= bMin[bI] && pixel2[0] <= rMax[bI] && pixel2[1] <= gMax[bI] && pixel2[2] <= bMax[bI])) {
+            gameRunning = gameRunning;
+        }
+        else {
+            gameRunning = !gameRunning;
+            Over();
+            highScore.push(score);
+            localStorage.setItem('CSH',JSON.stringify(highScore));
+        }
+    }
+}
